@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SportZone Indonesia</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f7f8;
+      color: #263238;
+      line-height: 1.7;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      padding: 16px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: bold;
+      color: #1565c0;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #263238;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #1565c0;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+
+      background:
+        linear-gradient(rgba(10,45,90,0.68), rgba(5,20,45,0.78)),
+        url("https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1800&q=80")
+        center/cover;
+
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 850px;
+    }
+
+    .hero h1 {
+      font-size: clamp(45px, 7vw, 78px);
+      margin-bottom: 15px;
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      opacity: 0.95;
+    }
+
+    .hero-button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 13px 28px;
+      background: white;
+      color: #1565c0;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .hero-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    /* SECTION */
+    section {
+      padding: 80px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #667;
+    }
+
+    /* ARTICLES */
+    .articles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+
+    .card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 25px;
+    }
+
+    .label {
+      display: inline-block;
+      padding: 5px 12px;
+      background: #e3f2fd;
+      color: #1565c0;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #667;
+    }
+
+    .read-more {
+      border: none;
+      background: none;
+      color: #1565c0;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      font-size: 15px;
+    }
+
+    .more-text {
+      display: none;
+      margin-top: 15px;
+      color: #555;
+    }
+
+    /* ABOUT */
+    .about {
+      background: white;
+    }
+
+    .about-content {
+      max-width: 850px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .about-content p {
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    /* BENEFITS */
+    .benefits {
+      background: #eef5fb;
+    }
+
+    .benefit-list {
+      max-width: 850px;
+      margin: auto;
+      display: grid;
+      gap: 15px;
+    }
+
+    .benefit {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .benefit strong {
+      color: #1565c0;
+    }
+
+    /* COMMENTS */
+    .comments {
+      max-width: 850px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #263238;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    footer p {
+      opacity: 0.8;
+      font-size: 14px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+
+      nav {
+        padding: 15px 5%;
+      }
+
+      nav ul {
+        gap: 12px;
+        font-size: 13px;
+      }
+
+      .articles {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 60px 5%;
+      }
+
+      .hero {
+        min-height: 75vh;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      .card img {
+        height: 230px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+
+    <div class="logo">
+      SportZone
+    </div>
+
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#articles">Olahraga</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#benefits">Manfaat</a></li>
+      <li><a href="#comments">Comments</a></li>
+    </ul>
+
+  </nav>
+
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+
+    <div class="hero-content">
+
+      <h1>SportZone</h1>
+
+      <p>
+        Mengenal berbagai cabang olahraga,
+        manfaatnya, dan semangat untuk hidup aktif.
+      </p>
+
+      <a href="#articles" class="hero-button">
+        Jelajahi Olahraga
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- ARTICLES -->
+  <section id="articles">
+
+    <div class="section-title">
+
+      <h2>Explore Sports</h2>
+
+      <p>
+        Kenali empat olahraga populer yang dapat
+        menjadi pilihan untuk tetap aktif dan sehat.
+      </p>
+
+    </div>
+
+
+    <div class="articles">
+
+
+      <!-- BULUTANGKIS -->
+      <article class="card">
+
+        <img
+          src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=1000&q=80"
+          alt="Bulutangkis"
+        >
+
+        <div class="card-content">
+
+          <span class="label">
+            Bulutangkis
+          </span>
+
+          <h3>
+            Serunya Bermain Bultang
+          </h3>
+
+          <p>
+            Bulutangkis merupakan olahraga yang membutuhkan
+            kecepatan, kelincahan, dan koordinasi tubuh.
+          </p>
+
+          <button
+            class="read-more"
+            onclick="toggleText('bultang')">
+            Baca selengkapnya →
+          </button>
+
+          <div class="more-text" id="bultang">
+
+            Bulutangkis dapat dimainkan secara tunggal maupun
+            ganda. Olahraga ini melatih refleks, kecepatan
+            bergerak, koordinasi mata dan tangan, serta
+            daya tahan tubuh.
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- BASKET -->
+      <article class="card">
+
+        <img
+          src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1000&q=80"
+          alt="Basket"
+        >
+
+        <div class="card-content">
+
+          <span class="label">
+            Basket
+          </span>
+
+          <h3>
+            Mengenal Olahraga Basket
+          </h3>
+
+          <p>
+            Basket merupakan olahraga tim yang menggabungkan
+            kecepatan, strategi, teknik, dan kerja sama.
+          </p>
+
+          <button
+            class="read-more"
+            onclick="toggleText('basket')">
+            Baca selengkapnya →
+          </button>
+
+          <div class="more-text" id="basket">
+
+            Permainan basket dimainkan oleh dua tim yang
+            berusaha mencetak poin dengan memasukkan bola
+            ke dalam ring lawan. Selain kemampuan fisik,
+            komunikasi dan kerja sama tim menjadi bagian
+            penting dalam permainan.
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- FUTSAL -->
+      <article class="card">
+
+        <img
+          src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1000&q=80"
+          alt="Futsal"
+        >
+
+        <div class="card-content">
+
+          <span class="label">
+            Futsal
+          </span>
+
+          <h3>
+            Energinya Permainan Futsal
+          </h3>
+
+          <p>
+            Futsal adalah olahraga beregu yang dimainkan
+            dengan tempo cepat dan membutuhkan kerja sama.
+          </p>
+
+          <button
+            class="read-more"
+            onclick="toggleText('futsal')">
+            Baca selengkapnya →
+          </button>
+
+          <div class="more-text" id="futsal">
+
+            Futsal dimainkan di lapangan yang lebih kecil
+            dibandingkan sepak bola. Permainan ini melatih
+            kecepatan, kontrol bola, pengambilan keputusan,
+            stamina, dan komunikasi antar pemain.
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- TENIS -->
+      <article class="card">
+
+        <img
+          src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=1000&q=80"
+          alt="Tenis"
+        >
+
+        <div class="card-content">
+
+          <span class="label">
+            Tenis
+          </span>
+
+          <h3>
+            Mengenal Olahraga Tenis
+          </h3>
+
+          <p>
+            Tenis membutuhkan kombinasi antara ketepatan,
+            kecepatan, konsentrasi, dan strategi permainan.
+          </p>
+
+          <button
+            class="read-more"
+            onclick="toggleText('tenis')">
+            Baca selengkapnya →
+          </button>
+
+          <div class="more-text" id="tenis">
+
+            Tenis dapat dimainkan secara tunggal maupun ganda.
+            Pemain menggunakan raket untuk memukul bola melewati
+            net ke area lawan. Olahraga ini membantu melatih
+            koordinasi, keseimbangan, dan daya tahan tubuh.
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+
+    <div class="section-title">
+
+      <h2>Tentang SportZone</h2>
+
+    </div>
+
+    <div class="about-content">
+
+      <p>
+        <strong>SportZone</strong> merupakan blog sederhana
+        yang membahas berbagai jenis olahraga populer.
+      </p>
+
+      <p>
+        Blog ini dibuat sebagai media informasi untuk
+        mengenalkan olahraga serta mendorong pembaca
+        untuk menjalani gaya hidup yang lebih aktif.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- BENEFITS -->
+  <section class="benefits" id="benefits">
+
+    <div class="section-title">
+
+      <h2>Manfaat Berolahraga</h2>
+
+      <p>
+        Olahraga secara rutin dapat memberikan berbagai
+        manfaat bagi tubuh dan kehidupan sehari-hari.
+      </p>
+
+    </div>
+
+
+    <div class="benefit-list">
+
+      <div class="benefit">
+
+        <strong>01. Menjaga kebugaran</strong>
+
+        <p>
+          Aktivitas fisik membantu menjaga kondisi tubuh
+          agar tetap aktif dan bugar.
+        </p>
+
+      </div>
+
+
+      <div class="benefit">
+
+        <strong>02. Meningkatkan kesehatan</strong>
+
+        <p>
+          Aktivitas fisik yang dilakukan secara rutin
+          dapat mendukung kesehatan tubuh.
+        </p>
+
+      </div>
+
+
+      <div class="benefit">
+
+        <strong>03. Melatih disiplin</strong>
+
+        <p>
+          Berolahraga secara teratur dapat membantu
+          membangun kebiasaan dan kedisiplinan.
+        </p>
+
+      </div>
+
+
+      <div class="benefit">
+
+        <strong>04. Meningkatkan kerja sama</strong>
+
+        <p>
+          Olahraga beregu dapat melatih komunikasi,
+          kerja sama, dan sportivitas.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- COMMENTS -->
+  <section id="comments">
+
+    <div class="section-title">
+
+      <h2>Comments</h2>
+
+      <p>
+        Bagikan pendapat dan pengalamanmu tentang olahraga.
+      </p>
+
+    </div>
+
+
+    <div class="comments">
+
+      <script
+        src="https://utteranc.es/client.js"
+        repo="sasikiranarzky/ruang-edukasi-"
+        issue-term="pathname"
+        label="blog-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+      </script>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <p>
+      © 2026 SportZone
+    </p>
+
+    <p>
+      Stay Active • Stay Healthy • Keep Moving
+    </p>
+
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+  <script>
+
+    function toggleText(id) {
+
+      const text = document.getElementById(id);
+
+      if (text.style.display === "block") {
+
+        text.style.display = "none";
+
+      } else {
+
+        text.style.display = "block";
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
